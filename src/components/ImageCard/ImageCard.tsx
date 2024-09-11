@@ -1,24 +1,18 @@
 import React from 'react';
+import { Image } from '../../types/Image';  // Імпортуємо інтерфейс
 import s from './ImageCard.module.css';
 
 interface ImageCardProps {
-    image: {
-        urls: {
-            small: string;
-        };
-        alt_description: string;
-    };
-    onClick: () => void;
+  image: Pick<Image, 'urls' | 'alt_description'>;  // Використовуємо тільки потрібні властивості
+  onClick: () => void;
 }
 
-const ImageCard: React.FC<ImageCardProps> = ({ image, onClick }) => { 
-    const { urls, alt_description } = image;
-
-    return (
-        <div className={s.card}>
-            <img src={urls.small} alt={alt_description} onClick={onClick}/>
-        </div>
-    );
+const ImageCard: React.FC<ImageCardProps> = ({ image, onClick }) => {
+  return (
+    <div className={s.card} onClick={onClick}>
+      <img src={image.urls.small} alt={image.alt_description} />
+    </div>
+  );
 };
 
 export default ImageCard;
